@@ -1,0 +1,7 @@
+services:
+  postgres-primary:
+    restart: "no"
+  postgres-audit:
+    restart: "no"
+  rabbitmq:
+    restart: "no"

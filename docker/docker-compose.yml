@@ -1,0 +1,61 @@
+services:
+  postgres-primary:
+    image: postgres:15-alpine
+    container_name: attendance-postgres-primary
+    environment:
+      POSTGRES_USER: ${PRIMARY_DB_USERNAME:-attendance}
+      POSTGRES_PASSWORD: ${PRIMARY_DB_PASSWORD:-attendance}
+      POSTGRES_DB: ${PRIMARY_DB_NAME:-attendance}
+    ports:
+      - "${PRIMARY_DB_PORT:-5432}:5432"
+    volumes:
+      - postgres_primary_data:/var/lib/postgresql/data
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "pg_isready -U ${PRIMARY_DB_USERNAME:-attendance} -d ${PRIMARY_DB_NAME:-attendance}",
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  postgres-audit:
+    image: postgres:15-alpine
+    container_name: attendance-postgres-audit
+    environment:
+      POSTGRES_USER: ${AUDIT_DB_USERNAME:-audit}
+      POSTGRES_PASSWORD: ${AUDIT_DB_PASSWORD:-audit}
+      POSTGRES_DB: ${AUDIT_DB_NAME:-audit}
+    ports:
+      - "${AUDIT_DB_PORT:-5433}:5432"
+    volumes:
+      - postgres_audit_data:/var/lib/postgresql/data
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "pg_isready -U ${AUDIT_DB_USERNAME:-audit} -d ${AUDIT_DB_NAME:-audit}",
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: attendance-rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_primary_data:
+  postgres_audit_data:
+  rabbitmq_data:

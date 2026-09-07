@@ -1,0 +1,43 @@
+# Dependencies
+node_modules/
+
+# Nx
+.nx/
+tmp/
+dist/
+
+# Build outputs
+build/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Uploads (runtime user content)
+uploads/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.swp
+
+# Test coverage
+coverage/
+
+# Misc
+*.tsbuildinfo
+
+# Session / meta artifacts
+.sisyphus/
+.version/
