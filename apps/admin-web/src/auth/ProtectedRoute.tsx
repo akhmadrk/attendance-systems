@@ -5,7 +5,6 @@ import { useAuth } from './AuthContext';
 export function ProtectedRoute({ children }: { children: ReactNode }) {
   const { isAuthenticated } = useAuth();
   const location = useLocation();
-  console.log('ProtectedRoute: isAuthenticated', isAuthenticated, 'location', location);
 
   if (!isAuthenticated) {
     return <Navigate to="/login" state={{ from: location }} replace />;

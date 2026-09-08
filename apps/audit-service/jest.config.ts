@@ -10,6 +10,7 @@ export default {
     '^@attendance/common$': '<rootDir>/../../libs/common/src/index.ts',
     '^@attendance/database$': '<rootDir>/../../libs/database/src/index.ts',
     '^@attendance/messaging$': '<rootDir>/../../libs/messaging/src/index.ts',
+    '^@attendance/notifications$': '<rootDir>/../../libs/notifications/src/index.ts',
   },
   moduleFileExtensions: ['ts', 'js', 'json'],
   coverageDirectory: '../../coverage/apps/audit-service',

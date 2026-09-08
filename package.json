@@ -19,7 +19,9 @@
     "start:attendance": "nx serve attendance-service",
     "start:audit": "nx serve audit-service",
     "start:employee-web": "pnpm --filter employee-web dev",
-    "build:employee-web": "pnpm --filter employee-web build"
+    "build:employee-web": "pnpm --filter employee-web build",
+    "start:admin-web": "pnpm --filter admin-web dev",
+    "build:admin-web": "pnpm --filter admin-web build"
   },
   "dependencies": {
     "@nestjs/common": "^10.4.15",
@@ -46,6 +48,7 @@
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.1",
     "socket.io": "^4.8.1",
+    "socket.io-client": "^4.8.3",
     "typeorm": "^0.3.20"
   },
   "devDependencies": {
