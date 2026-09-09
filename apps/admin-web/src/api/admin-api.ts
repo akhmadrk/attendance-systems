@@ -55,6 +55,13 @@ export async function deactivateEmployee(id: string): Promise<void> {
   await api.delete(`/admin/employees/${id}`);
 }
 
+export async function activateEmployee(id: string): Promise<void> {
+  const payload = {
+    status: 'ACTIVE'
+  }
+  await api.put(`/admin/employees/${id}`, payload);
+}
+
 export async function listAttendances(params: {
   userId?: string;
   from?: string;

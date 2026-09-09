@@ -4,6 +4,7 @@ import {
   deactivateEmployee,
   listEmployees,
   updateEmployee,
+  activateEmployee
 } from '../api/admin-api';
 import type { Employee, Paginated } from '../api/types';
 
@@ -89,6 +90,17 @@ export function EmployeesPage() {
     try {
       await deactivateEmployee(id);
       setMessage('Employee deactivated');
+      await load();
+    } catch (err) {
+      setError(extractMessage(err));
+    }
+  };
+
+  const handleActivate = async (id: string) => {
+    setError('');
+    try {
+      await activateEmployee(id);
+      setMessage('Employee Activated');
       await load();
     } catch (err) {
       setError(extractMessage(err));
@@ -227,16 +239,24 @@ export function EmployeesPage() {
                 <td className="px-4 py-3 space-x-2">
                   <button
                     onClick={() => handleEdit(employee)}
-                    className="text-blue-600 hover:underline"
+                    className="bg-blue-600 hover:bg-blue-700 text-white text-xs font-medium py-1 px-3 rounded"
                   >
                     Edit
                   </button>
                   {employee.status === 'ACTIVE' && (
                     <button
                       onClick={() => handleDeactivate(employee.id)}
-                      className="text-red-600 hover:underline"
+                      className="bg-red-600 hover:bg-red-700 text-white text-xs font-medium py-1 px-3 rounded"
                     >
                       Deactivate
+                    </button>
+                  )}
+                  {employee.status === 'INACTIVE' && (
+                    <button
+                      onClick={() => handleActivate(employee.id)}
+                      className="bg-yellow-600 hover:bg-yellow-700 text-white text-xs font-medium py-1 px-3 rounded"
+                    >
+                      Activate
                     </button>
                   )}
                 </td>
