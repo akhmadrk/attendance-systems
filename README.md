@@ -78,6 +78,8 @@ pnpm start:admin-web      # http://localhost:3101
 
 | Command | Description |
 |:---|:---|
+| `pnpm db:setup` | Run both DB migrations in parallel, then seed |
+| `pnpm dev` | Start all 5 services concurrently (3 backends + 2 frontends) |
 | `pnpm build` | Build all backend apps + libs |
 | `pnpm lint` / `pnpm test` / `pnpm typecheck` | Backend quality gates |
 | `pnpm build:employee-web` / `pnpm build:admin-web` | Build frontends |
